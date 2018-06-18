@@ -6,7 +6,7 @@
 * `FTP_USER` - user name
 * `FTP_PASSWORD` - password
 
-## Getting data from known file
+## Getting data from a known file
 
 ```R
 # domain and auth details will be added to a give path
