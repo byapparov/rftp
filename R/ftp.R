@@ -66,6 +66,8 @@ ftpFullUrl <- function(path) {
 #' @param verbose defines whether FTP curl feedback will be printed
 #' @param level internal parameter to track subfolder levels
 ftpListFiles <- function(path, pattern, verbose = FALSE, level = 0) {
+  if (length(path) == 0) return(character())
+
   ftp.url <- ftpFullUrl(path)
   paths <- RCurl::getURL(
     ftp.url,
@@ -83,25 +85,24 @@ ftpListFiles <- function(path, pattern, verbose = FALSE, level = 0) {
     subpaths <- unlist(stringi::stri_split_lines(subpaths))
     pathExtractDirs(subpaths, parent)
   })
+
   subdirs <- unlist(subdirs, use.names = FALSE)
+
+  subfolder.files <- ftpListFiles(
+    subdirs,
+    pattern,
+    verbose,
+    level = level + 1
+  )
 
   files <- sapply(names(paths), function(parent) {
     subpaths <- paths[[parent]]
     subpaths <- unlist(stringi::stri_split_lines(subpaths))
     pathExtractFiles(subpaths, parent, pattern)
   })
+
   files <- unlist(files, use.names = FALSE)
-  subfolder.files <- character()
-  if (length(subdirs) > 0) {
-    print(subdirs)
-    subfolder.files <-
-      ftpListFiles(
-        subdirs,
-        pattern,
-        verbose,
-        level = level + 1
-      )
-  }
+
   unlist(c(files, subfolder.files), recursive = TRUE)
 }
 
