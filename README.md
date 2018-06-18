@@ -1,5 +1,14 @@
 # rftp
 
+## Install
+
+To install package from GitHub:
+
+```R
+# install.packages('devtools')
+devtools::install_github('byapparov/rftp')
+```
+
 ## Environment Variables Required
 
 * `FTP_SERVER` - domain of the FTP(S) server
