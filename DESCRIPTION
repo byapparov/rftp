@@ -1,0 +1,10 @@
+Package: rftp
+Title: Access to FTP files in bulk with ease. 
+Version: 0.0.0.9000
+Authors@R: person("Bulat", "Yapparov", email = "bulat.yapparov@made.com", role = c("aut", "cre"))
+Description: Wraps RCurl function and provides functionality to search for all files in a given
+   folder recursively.
+Depends: R (>= 3.4.4)
+License: GPL
+Encoding: UTF-8
+LazyData: true
