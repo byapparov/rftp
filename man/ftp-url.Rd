@@ -35,5 +35,6 @@ Recursively scans given FTP folder for files that match specified regex pattern
 Environment variables required for FTP(S) access:
  * `FTP_USER` - User name
  * `FTP_PASSWORD` = Password
- * `FTP_SERVER` = FTP domain
+ * `FTP_HOST` = FTP server IP or domain
+ * `FTP_PORT` = FTP port, defaults to 21
 }

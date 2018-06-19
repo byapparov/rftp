@@ -25,18 +25,37 @@ ftpRead <- function(path, header = TRUE) {
 #' @details Environment variables required for FTP(S) access:
 #'  * `FTP_USER` - User name
 #'  * `FTP_PASSWORD` = Password
-#'  * `FTP_SERVER` = FTP domain
-#'
+#'  * `FTP_HOST` = FTP server IP or domain
+#'  * `FTP_PORT` = FTP port, defaults to 21
 #' @param storage - defines whether files will be read from FTP or FTPS. Defaults to `ftps`.
 ftpBaseUrl <- function(storage = "ftps") {
   paste0(
     storage , "://",
-    Sys.getenv("FTP_USER"),
+    ftpUser(),
     ":",
-    Sys.getenv("FTP_PASSWORD"),
+    ftpPassword(),
     "@",
-    Sys.getenv("FTP_SERVER")
+    ftpHost(),
+    ":",
+    ftpPort()
   )
+}
+
+ftpUser <- function() {
+  Sys.getenv("FTP_USER")
+}
+
+ftpPassword <- function() {
+  Sys.getenv("FTP_PASSWORD")
+}
+
+ftpHost <- function() {
+  x <- Sys.getenv("FTP_HOST")
+  assert_that(nchar(x) > 0, msg = "FTP_HOST environment must be set")
+}
+
+ftpPort <- function() {
+  Sys.getenv("FTP_PORT", unset = "21")
 }
 
 #' Gets full URL to the FTP object
