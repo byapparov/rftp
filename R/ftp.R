@@ -29,16 +29,18 @@ ftpRead <- function(path, header = TRUE) {
 #'  * `FTP_PORT` = FTP port, defaults to 21
 #' @param storage - defines whether files will be read from FTP or FTPS. Defaults to `ftps`.
 ftpBaseUrl <- function(storage = "ftps") {
-  paste0(
+  res <- paste0(
     storage , "://",
     ftpUser(),
     ":",
     ftpPassword(),
     "@",
-    ftpHost(),
-    ":",
-    ftpPort()
+    ftpHost()
   )
+  if (nchar(ftpPort())) {
+    res <- paste0(res , ":", ftpPort())
+  }
+  res
 }
 
 ftpUser <- function() {
@@ -56,7 +58,7 @@ ftpHost <- function() {
 }
 
 ftpPort <- function() {
-  Sys.getenv("FTP_PORT", unset = "21")
+  Sys.getenv("FTP_PORT")
 }
 
 #' Gets full URL to the FTP object
