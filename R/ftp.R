@@ -51,7 +51,8 @@ ftpPassword <- function() {
 
 ftpHost <- function() {
   x <- Sys.getenv("FTP_HOST")
-  assert_that(nchar(x) > 0, msg = "FTP_HOST environment must be set")
+  assertthat::assert_that(nchar(x) > 0, msg = "FTP_HOST environment must be set")
+  x
 }
 
 ftpPort <- function() {
