@@ -11,7 +11,8 @@ devtools::install_github('byapparov/rftp')
 
 ## Environment Variables Required
 
-* `FTP_SERVER` - domain of the FTP(S) server
+* `FTP_HOST` - domain of the FTP(S) server
+* `FTP_PORT` - port of the FTP(S) server, defaults to 21
 * `FTP_USER` - user name
 * `FTP_PASSWORD` - password
 
